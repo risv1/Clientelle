@@ -1,6 +1,5 @@
 import { useEffect, useRef, useState } from "react";
 import { Button } from "./ui/button";
-import { supabase } from "@/lib/supabase";
 
 const LoginForm = () => {
 

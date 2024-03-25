@@ -1,7 +1,69 @@
-import React from "react";
+"use client";
+
+import React, { useEffect, useRef, useState } from "react";
 import { ScrollArea } from "@/components/ui/scroll-area";
 
 const RequestForm = () => {
+  const [data, setData] = useState({
+    problem_details: "",
+    since_when: "",
+    customer_phone: "",
+    severity: "",
+    category: "",
+  });
+
+  const problem_detailsRef = useRef<HTMLTextAreaElement>(null);
+  const since_whenRef = useRef<HTMLInputElement>(null);
+  const customer_phoneRef = useRef<HTMLInputElement>(null);
+  const severityRef = useRef<HTMLSelectElement>(null);
+  const categoryRef = useRef<HTMLSelectElement>(null);
+
+  useEffect(() => {
+    if (
+      problem_detailsRef.current &&
+      since_whenRef.current &&
+      customer_phoneRef.current &&
+      severityRef.current &&
+      categoryRef.current
+    ) {
+      problem_detailsRef.current.value = data.problem_details;
+      since_whenRef.current.value = data.since_when;
+      customer_phoneRef.current.value = data.customer_phone;
+      severityRef.current.value = data.severity;
+      categoryRef.current.value = data.category;
+    }
+  }, []);
+
+  const handleChange = (
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
+    >
+  ) => {
+    setData({
+      ...data,
+      [e.target.id]: e.target.value,
+    });
+  };
+
+  const handleSubmit = async (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    console.log(data);
+    const res = await fetch("/api/request", {
+      method: "POST",
+      credentials: "include",
+      body: JSON.stringify(data),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    if (!res.ok) {
+      console.log("An error occurred");
+    }
+    console.log(res);
+    const message = await res.json();
+    console.log(message);
+  };
+
   return (
     <div className="w-4/5 h-10/12 flex flex-col gap-5 items-center overflow-hidden">
       <h1 className="text-white text-3xl pt-10 font-semibold">Details</h1>
@@ -12,6 +74,8 @@ const RequestForm = () => {
               Problem Details:
             </label>
             <textarea
+              onChange={handleChange}
+              ref={problem_detailsRef}
               id="problem_details"
               name="problem_details"
               className="w-full bg-gray-200 rounded p-2"
@@ -24,6 +88,8 @@ const RequestForm = () => {
               Since When:
             </label>
             <input
+              onChange={handleChange}
+              ref={since_whenRef}
               type="date"
               id="since_when"
               name="since_when"
@@ -35,6 +101,8 @@ const RequestForm = () => {
               Customer Phone:
             </label>
             <input
+              onChange={handleChange}
+              ref={customer_phoneRef}
               type="tel"
               id="customer_phone"
               name="customer_phone"
@@ -47,6 +115,8 @@ const RequestForm = () => {
               Severity:
             </label>
             <select
+              onChange={handleChange}
+              ref={severityRef}
               id="severity"
               name="severity"
               className="w-full bg-gray-200 rounded p-2"
@@ -62,6 +132,8 @@ const RequestForm = () => {
               Category:
             </label>
             <select
+              onChange={handleChange}
+              ref={categoryRef}
               id="category"
               name="category"
               className="w-full bg-gray-200 rounded p-2"
@@ -72,7 +144,21 @@ const RequestForm = () => {
               <option value="other">Other</option>
             </select>
           </div>
+
+          <div className="mb-4">
+            <label htmlFor="photo" className="text-white">
+              Upload a photo of the product problem (optional):
+            </label>
+            <input
+              type="file"
+              id="photo"
+              name="photo"
+              accept="image/*"
+              className="bg-gray-200 rounded p-2 w-full"
+            />
+          </div>
           <button
+            onClick={handleSubmit}
             type="submit"
             className="bg-blue-500 text-white py-2 px-4 rounded mt-4 hover:bg-blue-600 transition duration-300"
           >

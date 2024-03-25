@@ -8,6 +8,13 @@
       "when": 1711360590784,
       "tag": "0000_sharp_mole_man",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "5",
+      "when": 1711371263944,
+      "tag": "0001_rainy_bastion",
+      "breakpoints": true
     }
   ]
 }
