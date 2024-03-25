@@ -1,12 +1,12 @@
 import Image from "next/image";
 import Link from "next/link";
 
-export default function Component() {
+export default function HomeDesc() {
   return (
     <>
-      <div className="w-full h-full flex overflow-hidden">
-        <div className="flex flex-col justify-center items-center w-1/2 h-full">
-          <div className="w-4/5 h-5/6 rounded-lg flex justify-center items-center p-3 flex-col gap-3 bg-blue-500 bg-opacity-30">
+      <div className="w-full h-full flex sm:flex-col md:flex-col lg:flex-row xl:flex-row gap-3 overflow-x-hidden">
+        <div className="flex flex-col sm:w-full md:w-full lg:w-1/2 xl:1/2 justify-center items-center h-full">
+          <div className="sm:p-5 md:p-5 w-4/5 sm:h-full m:h-full lg:h-5/6 xl:h-5/6 rounded-lg flex justify-center items-center p-3 flex-col gap-3 bg-blue-500 bg-opacity-30">
             <h1 className="text-6xl font-bold text-white">Welcome to</h1>
             <h1 className="text-6xl font-bold text-white">Clientelle</h1>
             <p className="text-2xl text-white pl-10">
@@ -21,8 +21,8 @@ export default function Component() {
             </Link>
           </div>
         </div>
-        <div className="w-1/2 h-full flex justify-center items-center">
-          <div className="w-4/5 h-5/6 flex-col p-5 bg-blue-500 flex justify-center items-center bg-opacity-30 rounded-lg">
+        <div className="sm:w-full md:w-full sm:mb-5 md:mb-5 lg:w-1/2 xl:1/2 h-full flex justify-center items-center">
+          <div className="sm:p-5 md:p-5 w-4/5 sm:h-full m:h-full lg:h-5/6 xl:h-5/6 flex-col p-5 bg-blue-500 flex justify-center items-center bg-opacity-30 rounded-lg">
             <Image
               src="/customer-service.png"
               width={400}

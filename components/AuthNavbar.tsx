@@ -36,8 +36,8 @@ const AuthNavbar = () => {
   };
 
   return (
-    <div className="w-screen h-24 p-3 bg-transparent justify-center flex flex-row">
-      <div className="w-2/3 h-full flex flex-row gap-20 items-center">
+    <div className="w-screen h-24 p-3 bg-transparent lg:justify-center xl:justify-center sm:justify-start md:justify-start flex flex-row">
+      <div className="lg:w-2/3 xl:w-2/3 sm:w-full md:w-full h-full flex flex-row gap-20 items-center">
         <div className="flex flex-row gap-0">
           <Image width={70} height={35} src={logo} alt="Logo" />
           <h1 className="text-3xl p-3 font-bold text-white">Clientelle</h1>
@@ -63,6 +63,12 @@ const AuthNavbar = () => {
               Admin
             </Link>
           )}
+          <Link
+              href={"/profile"}
+              className="text-gray-300 font-medium text-xl hover:text-white"
+            >
+              Profile
+            </Link>
         </div>
         <p
           onClick={handleLogout}

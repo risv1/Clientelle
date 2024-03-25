@@ -71,7 +71,7 @@ const LoginPage = () => {
       >
         <LogOut width={40} height={40} />
       </div>
-      <div className="w-1/3 h-[85%] p-14 gap-5 rounded-xl bg-blue-500 bg-opacity-30 shadow-md shadow-blue-500 flex flex-col">
+      <div className="lg:w-3/5 xl:w-1/3 sm:w-3/5 md:3/5 h-[85%] p-14 gap-5 rounded-xl bg-blue-500 bg-opacity-30 shadow-md shadow-blue-500 flex flex-col">
         <div className="flex flex-row gap-2">
           <Image width={40} src={logo} alt="Logo" />
           <h2 className="text-white text-2xl font-semibold self-end">
