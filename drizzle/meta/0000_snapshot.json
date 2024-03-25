@@ -1,5 +1,5 @@
 {
-  "id": "b1c31753-4957-4357-b038-fa90b921740d",
+  "id": "e562a0e8-528c-4568-a36e-dab99d4cd9af",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "5",
   "dialect": "pg",
@@ -28,6 +28,12 @@
         },
         "password": {
           "name": "password",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "role": {
+          "name": "role",
           "type": "text",
           "primaryKey": false,
           "notNull": true

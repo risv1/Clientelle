@@ -2,7 +2,7 @@ import { db } from "@/lib/db";
 import { users } from "@/lib/schema";
 import { NextRequest, NextResponse } from "next/server";
 import { v4 as uuid } from "uuid";
-
+import bcrypt from "bcrypt";
 
 export async function POST(request: NextRequest) {
   try {
@@ -10,12 +10,14 @@ export async function POST(request: NextRequest) {
     console.log(data);
 
     const id = uuid()
+    const passwordHash = await bcrypt.hash(data.password, 10);
 
     const sendData = await db.insert(users).values({
       id: id,
       username: data.username,
       email: data.email,
-      password: data.password,
+      password: passwordHash,
+      role: "user",
     });
 
     if (sendData) {

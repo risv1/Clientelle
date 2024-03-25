@@ -28,7 +28,22 @@ const LoginForm = () => {
 
     const handleSubmit = async(e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
-        
+        e.preventDefault();
+        console.log(data)
+        const res = await fetch("/api/login", {
+            method: "POST",
+            credentials: "include",
+            body: JSON.stringify(data),
+            headers: {
+                "Content-Type": "application/json"
+            }   
+        })
+        if(!res.ok){
+            console.log("An error occurred")
+        }
+        console.log(res)
+        const message = await res.json();
+        console.log(message)
     }
 
     return(
