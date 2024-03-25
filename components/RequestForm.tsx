@@ -2,6 +2,9 @@
 
 import React, { useEffect, useRef, useState } from "react";
 import { ScrollArea } from "@/components/ui/scroll-area";
+import { useToast } from "@/components/ui/use-toast"
+import { ToastAction } from "@/components/ui/toast"
+import { useAuth } from "@/context/AuthProvider";
 
 const RequestForm = () => {
   const [data, setData] = useState({
@@ -11,6 +14,8 @@ const RequestForm = () => {
     severity: "",
     category: "",
   });
+  const { toast } = useToast()
+  const {user} = useAuth()
 
   const problem_detailsRef = useRef<HTMLTextAreaElement>(null);
   const since_whenRef = useRef<HTMLInputElement>(null);
@@ -48,10 +53,14 @@ const RequestForm = () => {
   const handleSubmit = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     console.log(data);
+    const requestData = {
+      ...data,
+      customer_email: user?.email
+    }
     const res = await fetch("/api/request", {
       method: "POST",
       credentials: "include",
-      body: JSON.stringify(data),
+      body: JSON.stringify(requestData),
       headers: {
         "Content-Type": "application/json",
       },
@@ -62,6 +71,13 @@ const RequestForm = () => {
     console.log(res);
     const message = await res.json();
     console.log(message);
+    toast({
+      title: "Request Submitted",
+      description: `Your ${data.category} request has been submitted successfully.`,
+      action: (
+        <ToastAction altText="Go to Undo">Undo</ToastAction>
+      ),
+    })
   };
 
   return (

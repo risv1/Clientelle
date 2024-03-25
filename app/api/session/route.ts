@@ -1,42 +1,19 @@
-import { cookies } from "next/headers";
+import { NextRequest, NextResponse } from "next/server";
 import jwt from "jsonwebtoken";
 
-export async function GET() {
-  const cookieStore = cookies();
-
-  const token = cookieStore.get("token");
-  if (!token) {
-    return new Response(JSON.stringify({ message: "Unauthorized" }), {
-      status: 401,
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-  }
-
-  const parsedUser = jwt.verify(token.value, "secret");
-  if (!parsedUser) {
-    return new Response(JSON.stringify({ message: "Unauthorized" }), {
-      status: 401,
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-  }
-
-  return new Response(
-    JSON.stringify({ message: "Authorized", user: {
-        // @ts-ignore
-        username: parsedUser.username,
-        // @ts-ignore
-        email: parsedUser.email,
-        // @ts-ignore
-        role: parsedUser.role,
-    } }), {
-        status: 200,
-        headers: {
-            "Content-Type": "application/json",
-        },
+export async function GET(request: NextRequest){
+    const token = request.cookies.get("token")?.value;
+    if (!token) {
+        return NextResponse.json({ message: "Unauthorized" });
     }
-  );
+
+    const user = jwt.verify(token, "secret");
+    return NextResponse.json({ message: "Authorized", user: {
+        //@ts-ignore
+        email: user.email,
+        //@ts-ignore
+        name: user.username,
+        //@ts-ignore
+        role: user.role
+    } });
 }

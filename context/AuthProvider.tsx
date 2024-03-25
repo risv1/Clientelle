@@ -14,7 +14,7 @@ const AuthContext = createContext<AuthContextType>({
   logout: () => {},
 });
 
-export const AuthProvider: React.FC<{ children: JSX.Element }> = ({ children }) => { 
+export const AuthProvider: React.FC<{ children: JSX.Element | JSX.Element[] }> = ({ children }) => { 
   const [user, setUser] = useState<User | null>(null);
 
   const updateUser = (user: User) => {

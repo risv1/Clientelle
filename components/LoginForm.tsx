@@ -1,8 +1,13 @@
 import { useEffect, useRef, useState } from "react";
 import { Button } from "./ui/button";
+import { useRouter } from "next/navigation";
+import { ToastAction } from "@/components/ui/toast"
+import { useToast } from "@/components/ui/use-toast"
 
 const LoginForm = () => {
 
+    const router = useRouter();
+    const { toast } = useToast()
     const [data, setData] = useState({
         email: "",
         password: ""
@@ -43,6 +48,14 @@ const LoginForm = () => {
         console.log(res)
         const message = await res.json();
         console.log(message)
+        toast({
+            title: "Logged in successfully",
+            description: `User ${data.email} has been logged in successfully.`,
+            action: (
+              <ToastAction altText="Goto undo">Undo</ToastAction>
+            ),
+          })
+        router.replace("/")
     }
 
     return(

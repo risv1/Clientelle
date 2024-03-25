@@ -23,7 +23,8 @@ const LoginPage = () => {
           method: "GET",
           credentials: "include",
         });
-        if(res.ok){
+         // @ts-ignore
+        if(res.user !== undefined){
           const data = await res.json();
           console.log("Fetched Data from session:", data.user)
           updateUser(data.user);

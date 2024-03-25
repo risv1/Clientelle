@@ -4,7 +4,7 @@ import { eq } from "drizzle-orm";
 import { NextRequest, NextResponse } from "next/server";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
-import { serialize } from "cookie";
+import { cookies } from "next/headers";
 
 export async function POST(request: NextRequest) {
   try {
@@ -20,26 +20,13 @@ export async function POST(request: NextRequest) {
     }
 
     const token = jwt.sign(user, "secret", { expiresIn: "24h" });
-    const serialized = serialize("token", token, {
-      httpOnly: true,
-    });
+    cookies().set("token", token, { httpOnly: true, expires: new Date(Date.now() + 24 * 60 * 60 * 1000)})
 
-    return new Response(
-      JSON.stringify({
-        message: "Login successful",
-        user: {
-          username: user.username,
-          email: user.email,
-        },
-      }),
-      {
-        status: 200,
-        headers: {
-          "Content-Type": "application/json",
-          "Set-Cookie": serialized,
-        },
-      }
-    );
+    return NextResponse.json({ message: "Logged in successfully", user: {
+      email: user.email,
+      name: user.username,
+      role: user.role
+    } });
   } catch (error) {
     return NextResponse.json({ message: "An error occurred", error: error });
   }
