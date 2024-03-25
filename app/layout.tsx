@@ -1,22 +1,20 @@
-import type { Metadata } from "next";
+"use client";
+
 import { Inter as FontSans } from "next/font/google";
 import "./globals.css";
 
 import { cn } from "@/lib/utils";
+import { AuthProvider } from "@/context/AuthProvider";
 
 const fontSans = FontSans({
   subsets: ["latin"],
   variable: "--font-sans",
 });
 
-export const metadata: Metadata = {
-  title: "Clientelle",
-};
-
 export default function RootLayout({
   children,
 }: Readonly<{
-  children: React.ReactNode;
+  children: JSX.Element;
 }>) {
   return (
     <html lang="en">
@@ -26,7 +24,9 @@ export default function RootLayout({
           fontSans.variable
         )}
       >
-        {children}
+        <AuthProvider>
+          {children}
+        </AuthProvider>
       </body>
     </html>
   );

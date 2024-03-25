@@ -1,9 +1,38 @@
+"use client";
+
 import Navbar from "@/components/Navbar";
 import RequestDesc from "@/components/RequestDesc";
 import RequestForm from "@/components/RequestForm";
+import { useAuth } from "@/context/AuthProvider";
 import bg from "@/public/vector.svg";
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 
 const RequestPage = () => {
+  const { updateUser } = useAuth();
+  const router = useRouter();
+
+  useEffect(() => {
+    const fetchUser = async () => {
+      try {
+        const res = await fetch("/api/session", {
+          method: "GET",
+          credentials: "include",
+        });
+        if (!res.ok) {
+          router.replace("/login");
+        } else {
+          const data = await res.json();
+          console.log("Fetched Data from session:", data.user);
+          updateUser(data.user);
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchUser();
+  }, []);
+
   return (
     <div
       className="w-screen h-screen flex flex-col"

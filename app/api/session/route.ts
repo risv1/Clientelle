@@ -30,6 +30,8 @@ export async function GET() {
         username: parsedUser.username,
         // @ts-ignore
         email: parsedUser.email,
+        // @ts-ignore
+        role: parsedUser.role,
     } }), {
         status: 200,
         headers: {

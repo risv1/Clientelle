@@ -7,10 +7,35 @@ import { LogOut } from "lucide-react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import LoginForm from "@/components/LoginForm";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import RegisterForm from "@/components/RegisterForm";
+import { useAuth } from "@/context/AuthProvider";
 
 const LoginPage = () => {
+
+  const {updateUser} = useAuth()
+  const router = useRouter();
+
+  useEffect(()=>{
+    const fetchUser = async() => {
+      try{
+        const res = await fetch("/api/session", {
+          method: "GET",
+          credentials: "include",
+        });
+        if(res.ok){
+          const data = await res.json();
+          console.log("Fetched Data from session:", data.user)
+          updateUser(data.user);
+          router.replace("/")
+        }
+      }catch(error){
+        console.log(error)
+      }
+    } 
+    fetchUser()
+  }, [])
+  
   const [isLogin, setIsLogin] = useState<boolean>(true);
 
   const handleRegister = () => {
@@ -21,7 +46,6 @@ const LoginPage = () => {
     setIsLogin(true);
   }
 
-  const router = useRouter();
   const handleRoute = (route: string) => {
     router.replace(route);
   };
