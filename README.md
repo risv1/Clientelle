@@ -1,7 +1,7 @@
 # Clientelle
 
 ## Description 
-A customer service management application to effortlessly submit any product-related issues or queries.
+A customer service management application to streamline the process of submitting and managing product-related issues and queries.
 
 ## Stack
  - Next.js
