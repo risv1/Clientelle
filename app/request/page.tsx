@@ -13,6 +13,12 @@ const RequestPage = () => {
   const { updateUser, user } = useAuth();
   const router = useRouter();
 
+  useEffect(()=>{
+    if(!user){
+      router.replace("/login")
+    }
+  }, [])
+
   useEffect(() => {
     const fetchUser = async () => {
       try {
@@ -20,11 +26,8 @@ const RequestPage = () => {
           method: "GET",
           credentials: "include",
         });
-
         const data = await res.json();
-        console.log("Fetched Data from session:", data.user);
         updateUser(data.user);
-        console.log("User Updated");
       } catch (error) {
         console.log(error);
       }

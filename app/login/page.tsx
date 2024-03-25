@@ -13,8 +13,14 @@ import { useAuth } from "@/context/AuthProvider";
 
 const LoginPage = () => {
 
-  const {updateUser} = useAuth()
+  const {updateUser, user} = useAuth()
   const router = useRouter();
+
+  useEffect(()=>{
+    if(user){
+      router.replace("/")
+    }
+  }, [])
 
   useEffect(()=>{
     const fetchUser = async() => {
@@ -26,7 +32,6 @@ const LoginPage = () => {
          // @ts-ignore
         if(res.user !== undefined){
           const data = await res.json();
-          console.log("Fetched Data from session:", data.user)
           updateUser(data.user);
           router.replace("/")
         }

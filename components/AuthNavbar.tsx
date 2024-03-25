@@ -66,7 +66,7 @@ const AuthNavbar = () => {
         </div>
         <p
           onClick={handleLogout}
-          className="ml-auto pl-5 pr-5 pt-2 pb-2 hover:bg-red-500 duration-150 ease-in-out bg-red-600 rounded-lg text-white text-xl font-bold"
+          className="hover:cursor-pointer ml-auto pl-5 pr-5 pt-2 pb-2 hover:bg-red-500 duration-150 ease-in-out bg-red-600 rounded-lg text-white text-xl font-bold"
         >
           Logout
         </p>
