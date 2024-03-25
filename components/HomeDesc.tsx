@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import logo from "@/public/logo.png";
 
 export default function HomeDesc() {
   return (
@@ -8,7 +9,12 @@ export default function HomeDesc() {
         <div className="flex flex-col sm:w-full md:w-full lg:w-1/2 xl:1/2 justify-center items-center h-full">
           <div className="sm:p-5 md:p-5 w-4/5 sm:h-full m:h-full lg:h-5/6 xl:h-5/6 rounded-lg flex justify-center items-center p-3 flex-col gap-3 bg-blue-500 bg-opacity-30">
             <h1 className="text-6xl font-bold text-white">Welcome to</h1>
-            <h1 className="text-6xl font-bold text-white">Clientelle</h1>
+            <h1 className="text-6xl font-bold text-white flex flex-row items-center gap-3">
+              <span>
+                <Image width={70} height={30} src={logo} alt="Logo" />
+              </span>{" "}
+              <span> Clientelle</span>
+            </h1>
             <p className="text-2xl text-white pl-10">
               Facilitating client support processes to ensure seamless
               interactions and enhance overall customer satisfaction.
