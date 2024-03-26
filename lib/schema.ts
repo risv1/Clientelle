@@ -16,4 +16,5 @@ export const requests = pgTable("requests", {
   customer_phone: text("customer_phone").notNull(),
   severity: text("severity").notNull(),
   category: text("category").notNull(),
+  status: text("status").notNull(),
 });

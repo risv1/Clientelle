@@ -21,7 +21,6 @@ const AdminRequests = () => {
         console.error("Error fetching data");
       }
       const data = await res.json();
-      console.log(data);
       setData(data);
     };
     fetchRequests();

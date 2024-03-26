@@ -1,9 +1,10 @@
 "use client";
 
 import AuthNavbar from "@/components/AuthNavbar";
-import Component from "@/components/HomeDesc";
+import HomeDesc from "@/components/HomeDesc";
 import Navbar from "@/components/Navbar";
 import { useAuth } from "@/context/AuthProvider";
+import { fetchUser } from "@/lib/utils";
 import bg from "@/public/vector.svg";
 import { useEffect } from "react";
 
@@ -12,19 +13,7 @@ const HomePage = () => {
   const {user, updateUser} = useAuth()
 
   useEffect(() => {
-    const fetchUser = async () => {
-      try {
-        const res = await fetch("/api/session", {
-          method: "GET",
-          credentials: "include",
-        });
-        const data = await res.json();
-        updateUser(data.user);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    fetchUser();
+    fetchUser(updateUser)
   }, []);
 
   return (
@@ -38,7 +27,7 @@ const HomePage = () => {
       }}
     >
      {!user ? (<Navbar />):(<AuthNavbar />)}
-      <Component />
+      <HomeDesc />
       </div>
     </>
   );

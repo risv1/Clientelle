@@ -12,7 +12,7 @@ export async function GET(request: NextRequest){
         //@ts-ignore
         email: user.email,
         //@ts-ignore
-        name: user.username,
+        username: user.username,
         //@ts-ignore
         role: user.role
     } });

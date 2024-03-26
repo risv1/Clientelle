@@ -15,6 +15,13 @@
       "when": 1711371263944,
       "tag": "0001_rainy_bastion",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "5",
+      "when": 1711422133591,
+      "tag": "0002_chunky_starbolt",
+      "breakpoints": true
     }
   ]
 }

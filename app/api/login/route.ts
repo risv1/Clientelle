@@ -24,7 +24,7 @@ export async function POST(request: NextRequest) {
 
     return NextResponse.json({ message: "Logged in successfully", user: {
       email: user.email,
-      name: user.username,
+      username: user.username,
       role: user.role
     } });
   } catch (error) {

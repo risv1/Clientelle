@@ -5,7 +5,7 @@ import logo from "@/public/logo.png";
 export default function HomeDesc() {
   return (
     <>
-      <div className="w-full h-full flex sm:flex-col md:flex-col lg:flex-row xl:flex-row gap-3 overflow-x-hidden">
+      <div className="w-full h-full flex sm:flex-col md:flex-col lg:flex-row xl:flex-row gap-3 lg:overflow-hidden xl:overflow-hidden sm:overflow-x-hidden md:overflow-x-hidden">
         <div className="flex flex-col sm:w-full md:w-full lg:w-1/2 xl:1/2 justify-center items-center h-full">
           <div className="sm:p-5 md:p-5 w-4/5 sm:h-full m:h-full lg:h-5/6 xl:h-5/6 rounded-lg flex justify-center items-center p-3 flex-col gap-3 bg-blue-500 bg-opacity-30">
             <h1 className="text-6xl font-bold text-white">Welcome to</h1>

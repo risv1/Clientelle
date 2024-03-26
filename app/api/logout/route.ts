@@ -12,7 +12,6 @@ export async function POST(request: NextRequest) {
 
   cookies().delete("token");
   const check = cookies().get("token");
-  console.log(check);
   if (check?.value !== "") {
     return NextResponse.json({message: "Couldn't Logout"});
   }
